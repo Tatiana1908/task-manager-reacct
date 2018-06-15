@@ -4,9 +4,10 @@
     bottom: 50px;
     right: 50px;
     font-size: 40px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     font-weight: 800;
+    cursor: pointer;
 }
 .add-task-overlay, .expired-tasks-overlay{
     position: fixed;
@@ -17,22 +18,11 @@
     background: rgba(0, 0, 0, .3);
     z-index: 99;
 }
-.expired-tasks-modal{
-    position: relative;
-    width: 200px;
-}
-.expired-tasks-modal .description{
-    display: block;
-    margin: 20px 0 40px;
-    text-align: center;
-    font-size: 20px;
-}
 .expired-tasks-modal .number{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
 }
-
 .remove-task{
     margin: 0 auto;
     display: block;
@@ -40,30 +30,31 @@
 .expired-tasks-modal .next, .expired-tasks-modal .prev{
     cursor: pointer;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%)
+    top: 35%;
+    font-size: 40px;
 }
 .expired-tasks-modal .next.hidden, .expired-tasks-modal .prev.hidden{
     opacity: .3;
     cursor: auto;
 }
 .expired-tasks-modal .next{
-    right: 10px;
+    right: 20px;
 }
 .expired-tasks-modal .prev{
-    left: 10px;
+    left: 20px;
 }
-/* .add-task-overlay.visible, .expired-tasks-overlay.visible{
-    display: block;
-} */
 .add-task-modal, .expired-tasks-modal{
-    /* width: 200px; */
     background: #fff;
     position: absolute;
     padding: 20px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.expired-tasks-modal {
+    padding-top: 40px;
+    text-align: center;
+    width: 350px;
 }
 .tasks-wrapper{
     padding: 50px;
@@ -119,7 +110,6 @@
     padding: 10px 20px;
     border: none;
     margin: 0 10px;
-
 }
 .btn-default:hover{
     cursor: pointer;
@@ -127,4 +117,9 @@
 }
 .input-default{
     padding: 5px;
+}
+.warning-text{
+    color: red;
+    text-align: center;
+    margin: 50px 0;
 }

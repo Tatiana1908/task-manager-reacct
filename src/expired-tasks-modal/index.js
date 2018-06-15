@@ -1,46 +1,50 @@
 import React, {Component} from 'react'
 
 export default class ExpiredTasksModal extends Component{
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       currentDisplayedExpiredTask: 0
     }
-    this.expiredTasks = this.props.expiredTasks
-  }
-
-  componentWillReceiveProps = () => {
-    this.expiredTasks = this.props.expiredTasks
   }
 
   getPrevExpiredTask = () => {
     if(this.state.currentDisplayedExpiredTask > 0) {
       this.setState({currentDisplayedExpiredTask: this.state.currentDisplayedExpiredTask - 1})
     }
-    
   }
 
   getNextExpiredTask =  () => {
-    
-    if (this.state.currentDisplayedExpiredTask < this.expiredTasks.length -1 ){
+    if (this.state.currentDisplayedExpiredTask < this.props.expiredTasks.length -1 ){
       this.setState({currentDisplayedExpiredTask: this.state.currentDisplayedExpiredTask + 1})
-      console.log(this.expiredTasks.length)
     }
-  
+  }
+
+  onClickToRemoveBtn = e => {
+    e.preventDefault()
+      if(this.state.currentDisplayedExpiredTask > 0 ){
+        this.setState({currentDisplayedExpiredTask: this.state.currentDisplayedExpiredTask - 1})
+      }else{
+        this.setState({currentDisplayedExpiredTask: 0})
+      }
+
+      this.props.removeTask(this.props.expiredTasks[this.state.currentDisplayedExpiredTask].id)
   }
 
   render(){
-    console.log(this.expiredTasks.length)
+    let indexOfCurrentTask = this.state.currentDisplayedExpiredTask;
+    let prevBtnClass = !indexOfCurrentTask ? 'prev hidden' : 'prev';
+    let nextBtnClass = (indexOfCurrentTask === this.props.expiredTasks.length - 1)? 'next hidden' : 'next';
     return(
       <div>
-        {this.expiredTasks.length ?
+        {this.props.expiredTasks.length ?
         <div className="expired-tasks-overlay">
           <div className="expired-tasks-modal">
-            <span className="number">{this.state.currentDisplayedExpiredTask + 1}</span>
-            <span className="prev" onClick={this.getPrevExpiredTask}>Prev</span>
-            <span className="next" onClick={this.getNextExpiredTask}>Next</span>
-            <span className="description">{this.expiredTasks[this.state.currentDisplayedExpiredTask].description}</span>
-            <button className="remove-task">Remove</button>
+            <span className="number">{indexOfCurrentTask + 1}</span>
+            <h2 className="warning-text">Task {this.props.expiredTasks[indexOfCurrentTask].description} expired!</h2>
+            <button className="btn-default" onClick={this.onClickToRemoveBtn}>Remove</button>
+            <span className={prevBtnClass} onClick={this.getPrevExpiredTask}>&#8249;</span>
+            <span className={nextBtnClass} onClick={this.getNextExpiredTask}>&#8250;</span>
           </div>  
         </div>
         : null

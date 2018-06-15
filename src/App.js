@@ -61,8 +61,8 @@ class App extends Component {
   updateExpiredStatus = id => {
     let taskForUpdate = this.state.tasks.find( task => task.id === id)
     taskForUpdate.expired = true
-    let newTaskList = [...this.state.tasks.filter( task => task.id !== id), taskForUpdate]
-    this.setState({tasks: newTaskList})
+    let newTasksList = [...this.state.tasks.filter( task => task.id !== id), taskForUpdate]
+    this.setState({tasks: newTasksList})
   }
 
   getExpiredTasks = () => {
@@ -70,13 +70,16 @@ class App extends Component {
     return expiredList
   }
 
+  removeTask = id =>{
+      let newTasksList = this.state.tasks.filter( task => task.id !== id )
+      this.setState({tasks: newTasksList})
+  }
   render() {
-    console.log(this.getExpiredTasks())
     return (
       <div className="app">
         <TaskList tasksList={this.state.tasks} removeTaskHandler={this.removeTask} updateExpiredStatus={this.updateExpiredStatus}/>
         <ModalAddNewTask addNewTask={this.addNewTask}/>
-        <ExpiredTasksModal expiredTasks={this.getExpiredTasks()}/>
+        <ExpiredTasksModal expiredTasks={this.getExpiredTasks()} removeTask={this.removeTask}/>
       </div>
     )
   }
