@@ -32,6 +32,12 @@
     position: absolute;
     top: 35%;
     font-size: 40px;
+    background: inherit;
+    border: none;
+    border: none;
+}
+.expired-tasks-modal .next:focus, .expired-tasks-modal .prev:focus{
+    outline: none;
 }
 .expired-tasks-modal .next.hidden, .expired-tasks-modal .prev.hidden{
     opacity: .3;
@@ -96,9 +102,14 @@
     padding: 10px 0;
 }
 .remove-item-btn{
+    background: inherit;
+    border: none;
     transform: rotate(45deg);
     font-weight: 800;
     font-size: 30px;
+}
+.remove-item-btn:focus{
+    outline: none;
 }
 .error-wrap{
     padding-bottom: 15px;

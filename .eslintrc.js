@@ -1,10 +1,10 @@
 module.exports = {
     "env": {
         "browser": true,
-        "commonjs": true,
+        "commonjs": false,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["airbnb"],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -32,5 +32,6 @@ module.exports = {
             "error",
             "never"
         ]
+
     }
 };

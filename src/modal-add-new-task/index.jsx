@@ -42,6 +42,7 @@ export default class ModalAddNewTask extends Component{
       this.setState({open: false})
     }
   }
+
   handlerOnClickToModal(event){
     event = event || window.event;
     event.stopPropagation && event.stopPropagation()
