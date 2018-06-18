@@ -8,7 +8,7 @@ export default function TaskList(props) {
       {props.tasksList.map(task => (<TaskItem
         taskItem={task}
         key={task.id}
-        removeTaskHandler={props.removeTaskHandler}
+        removeTask={props.removeTask}
         updateExpiredStatus={props.updateExpiredStatus}
       />))}
     </ul>
@@ -18,5 +18,5 @@ export default function TaskList(props) {
 TaskList.propTypes = {
   tasksList: PropTypes.array,
   updateExpiredStatus: PropTypes.func,
-  removeTaskHandler: PropTypes.func,
+  removeTask: PropTypes.func,
 }

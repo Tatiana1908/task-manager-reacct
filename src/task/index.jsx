@@ -5,24 +5,36 @@ export default class TaskItem extends Component {
   constructor(props) {
     super(props)
     this.runTimer = this.runTimer.bind(this)
+    this.onRemoveHandler = this.onRemoveHandler.bind(this)
+    this.interval = ''
   }
+
+  onRemoveHandler(e) {
+    e.preventDefault()
+    this.props.removeTask(this.props.taskItem.id)
+  }
+
   runTimer() {
     const msInHour = 3600000
     const msInMinute = 60000
     const msInSecond = 1000
     this.time = Date.parse(this.props.taskItem.date)
+    let interval
 
-    const interval = setInterval(() => {
-      function handleOnTimeOver() {
-        clearInterval(interval)
-      }
+    function handleOnTimeOver() {
+      clearInterval(interval)
+    }
 
-      if ((this.time - Date.now()) > 0) {
+    interval = setInterval(() => {
+      if (!this.timerElement) return clearInterval(interval)
+     
+      if (((this.time - Date.now()) > 0)) {
         const hours = (this.time - Date.now()) / msInHour
         const minutes = ((this.time - Date.now()) % msInHour) / msInMinute
         const seconds = (((this.time - Date.now()) % msInHour) % msInMinute) / msInSecond
+        this.timerElement.innerHTML = `${parseInt(hours, 10)} : ${parseInt(minutes, 10)} : ${parseInt(seconds, 10)}`
 
-        return this.timerElement.innerHTML = `${parseInt(hours, 10)} : ${parseInt(minutes, 10)} : ${parseInt(seconds, 10)}`
+        return true
       }
       if (this.props.taskItem.expired) return null
 
@@ -47,7 +59,7 @@ export default class TaskItem extends Component {
             ref={node => (this.timerElement = node)}
           >wait
           </span>
-          <button className="remove-item-btn" onClick={() => this.props.removeTaskHandler(id)} >+</button>
+          <button className="remove-item-btn" onClick={this.onRemoveHandler} >+</button>
           {this.runTimer()}
         </div>
         }
@@ -64,7 +76,7 @@ TaskItem.propTypes = {
     expired: PropTypes.bool,
   }),
   updateExpiredStatus: PropTypes.func,
-  removeTaskHandler: PropTypes.func,
+  removeTask: PropTypes.func,
   handleOnTimeOver: PropTypes.func,
 
 

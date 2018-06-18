@@ -8,25 +8,25 @@ import './App.css'
 const initialTasksList = [
   {
     description: 'task1',
-    date: '2018-06-18',
+    date: '2018-06-19 11:00',
     expired: false,
     id: 1,
   },
   {
     description: 'task2',
-    date: '2018-06-14',
+    date: '2018-06-17 10:34',
     expired: false,
     id: 2,
   },
   {
     description: 'task3',
-    date: '2018-06-14',
+    date: '2018-06-20 10:33',
     expired: false,
     id: 3,
   },
   {
     description: 'task4',
-    date: '2018-06-14',
+    date: '2018-07-14',
     expired: false,
     id: 4,
   },
@@ -81,7 +81,7 @@ class App extends Component {
         <div>
           <TaskList
             tasksList={this.state.tasks}
-            removeTaskHandler={this.removeTask}
+            removeTask={this.removeTask}
             updateExpiredStatus={this.updateExpiredStatus}
           />
           <ExpiredTasksModal expiredTasks={this.getExpiredTasks()} removeTask={this.removeTask} />
